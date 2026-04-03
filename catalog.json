@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-03T07:31:25.468367+00:00",
-  "total_skills": 76,
+  "generated_at": "2026-04-03T10:58:49.224588+00:00",
+  "total_skills": 77,
   "sources": {
-    "custom": 3,
+    "custom": 4,
     "third-party": 73
   },
   "duplicates": [
@@ -43,6 +43,15 @@
       "source": "custom",
       "source_type": "custom",
       "path": "custom/example-skill",
+      "has_assets": false,
+      "license": "MIT"
+    },
+    {
+      "name": "observe",
+      "description": "Memory observer agent for recording structured observations from primary Claude Code sessions. Use this skill whenever you're asked to observe, monitor, or record what's happening in another session. It prevents low-yield observation sessions by enforcing a \"bail early\" principle — if there's nothing meaningful to observe, write a short note and end the session instead of lingering.",
+      "source": "custom",
+      "source_type": "custom",
+      "path": "custom/observe",
       "has_assets": false,
       "license": "MIT"
     },
