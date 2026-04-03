@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-03T06:53:25.106283+00:00",
-  "total_skills": 75,
+  "generated_at": "2026-04-03T07:34:38.699559+00:00",
+  "total_skills": 76,
   "sources": {
-    "custom": 2,
+    "custom": 3,
     "third-party": 73
   },
   "duplicates": [
@@ -45,6 +45,14 @@
       "path": "custom/example-skill",
       "has_assets": false,
       "license": "MIT"
+    },
+    {
+      "name": "real-review",
+      "description": "Fact-check written content (GitHub issues, docs, reports, posts) by verifying every claim, number, link, code reference, and conclusion against actual evidence. Use this skill when the user asks to \"review\", \"fact-check\", \"verify\", or \"audit\" written content for accuracy. Also use it when the user says things like \"check this post\", \"is this correct\", \"review before publishing\", or \"make sure the claims are right\". This skill is about factual accuracy of prose, not code review or style review.",
+      "source": "custom",
+      "source_type": "custom",
+      "path": "custom/real-review",
+      "has_assets": false
     },
     {
       "name": "reduce-model",
