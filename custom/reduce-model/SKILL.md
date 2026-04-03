@@ -82,8 +82,9 @@ This typically downloads ~10-20MB: `config.json`, `generation_config.json`, `mod
 Write a Python script (`patch_model.py`) that modifies two files in-place:
 
 **config.json:**
-- Set `num_hidden_layers` to the target layer count (e.g., 48 → 4)
-- Leave everything else unchanged — MoE config, attention heads, vocabulary size, etc. are all per-layer properties that don't depend on the total layer count
+- Set `num_hidden_layers` to the target layer count (e.g., 48 → 4).
+- If `max_window_layers` is present, cap its value to be no more than the new `num_hidden_layers`.
+- Leave everything else unchanged — MoE config, attention heads, vocabulary size, etc. are all per-layer properties that don't depend on the total layer count.
 
 **model.safetensors.index.json:**
 - Parse the `weight_map` dictionary
