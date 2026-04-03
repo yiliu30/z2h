@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated_at": "2026-02-26T01:00:06.038622+00:00",
-  "total_skills": 74,
+  "generated_at": "2026-04-03T06:53:25.106283+00:00",
+  "total_skills": 75,
   "sources": {
-    "custom": 1,
+    "custom": 2,
     "third-party": 73
   },
   "duplicates": [
@@ -45,6 +45,14 @@
       "path": "custom/example-skill",
       "has_assets": false,
       "license": "MIT"
+    },
+    {
+      "name": "reduce-model",
+      "description": "Create a reduced (fewer-layer) version of a large HuggingFace model for fast testing and debugging. Use this skill whenever the user wants to reduce a model's layer count, create a small test model, download only part of a model's weights, debug quantization on a smaller model, speed up the testing-verification loop for large LLMs, or create a lightweight version of any HF model for rapid iteration. Trigger on phrases like \"reduce model\", \"small test model\", \"fewer layers\", \"download partial model\", \"debug with smaller model\", \"shrink model for testing\", even if the user doesn't use the exact term \"reduce\".",
+      "source": "custom",
+      "source_type": "custom",
+      "path": "custom/reduce-model",
+      "has_assets": true
     },
     {
       "name": "agent-governance",
