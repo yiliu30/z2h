@@ -62,14 +62,14 @@ The format depends on what you found. Use the structure that fits:
 
 | Dimension | Variant A | Variant B | Variant C |
 |-----------|-----------|-----------|-----------|
-| [aspect]  | [value] — `source:line` | [value] — `source:line` | ... |
+| [aspect]  | [value] — `file:line` | [value] — `file:line` | ... |
 
 ## Key Differences
 1. **[Difference]** — [evidence]
 2. **[Difference]** — [evidence]
 ```
 
-Use `input × input → accumulator` notation for dtype/GEMM tables (e.g., `FP8 × FP8 → FP22`).
+Use `input × input → accumulator` notation for dtype/GEMM tables (e.g., `FP8 × FP8 → FP32`).
 
 ### For hardware/software constraint investigations:
 
