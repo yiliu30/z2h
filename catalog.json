@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-03T11:01:02.385443+00:00",
-  "total_skills": 77,
+  "generated_at": "2026-04-03T11:52:09.435327+00:00",
+  "total_skills": 78,
   "sources": {
-    "custom": 4,
+    "custom": 5,
     "third-party": 73
   },
   "duplicates": [
@@ -43,6 +43,15 @@
       "source": "custom",
       "source_type": "custom",
       "path": "custom/example-skill",
+      "has_assets": false,
+      "license": "MIT"
+    },
+    {
+      "name": "find-sth",
+      "description": "Investigate a technical question by searching across multiple sources (source code, documentation, academic papers, existing findings) and produce a sourced findings document saved to disk. Use this skill whenever the user asks to \"investigate\", \"find out\", \"research\", \"figure out\", \"what does X support\", \"how does X work\", \"why does X differ from Y\", or any question that requires digging through code and docs to answer. Also use it when the user asks to compare implementations, trace a behavior through a codebase, or understand hardware/software constraints. This is for discovery work, not fact-checking existing documents (use real-review for that).",
+      "source": "custom",
+      "source_type": "custom",
+      "path": "custom/find-sth",
       "has_assets": false,
       "license": "MIT"
     },
