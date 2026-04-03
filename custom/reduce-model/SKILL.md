@@ -154,9 +154,11 @@ hf download "$MODEL_ID" --local-dir "$OUTPUT_DIR" \
 SHARDS=$(python "$SCRIPT_DIR/patch_model.py" --model-dir "$OUTPUT_DIR" --num-layers "$NUM_LAYERS")
 
 # Phase 5: Download shards
+INCLUDE_ARGS=()
 for shard in $SHARDS; do
-    hf download "$MODEL_ID" --local-dir "$OUTPUT_DIR" --include "$shard"
+    INCLUDE_ARGS+=(--include "$shard")
 done
+hf download "$MODEL_ID" --local-dir "$OUTPUT_DIR" "${INCLUDE_ARGS[@]}"
 
 # Phase 6: Smoke test
 python "$SCRIPT_DIR/test_generation.py" --model-dir "$OUTPUT_DIR"
