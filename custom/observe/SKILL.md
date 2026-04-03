@@ -31,7 +31,7 @@ If it's genuinely ambiguous, write a condensed observation covering only what yo
 Before recording, check if `observations/` already has a recent file for the same session or topic. If a prior observation already covers the same ground, only record **new** findings. Don't duplicate.
 
 ```bash
-ls observations/ | tail -5
+[ -d observations ] && ls observations/ | tail -5
 ```
 
 ## Step 2: Minimal Note (bail case)
@@ -47,7 +47,7 @@ When there's nothing meaningful to observe:
 **Recommendation:** [when to check back or what to wait for]
 ```
 
-Write this, save it, and **end your session.** Don't pad it or keep watching.
+Write this, save it (using the format in Step 4), and **end your session.** Don't pad it or keep watching.
 
 ## Step 3: Full Observation (observe case)
 
