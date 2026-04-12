@@ -1,0 +1,36 @@
+{
+  "name": "z2h-custom",
+  "version": "0.1.0",
+  "description": "Custom installable skills from z2h.",
+  "author": {
+    "name": "z2h",
+    "url": "https://github.com/yiliu30/z2h"
+  },
+  "homepage": "https://github.com/yiliu30/z2h",
+  "repository": "https://github.com/yiliu30/z2h",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "agents",
+    "codex",
+    "claude-code"
+  ],
+  "skills": "./../../../skills",
+  "interface": {
+    "displayName": "z2h (Zero to Hero)",
+    "shortDescription": "Custom skills bundled from this repo.",
+    "longDescription": "Installs the custom skills published in z2h.",
+    "developerName": "z2h",
+    "category": "Productivity",
+    "capabilities": [
+      "Write"
+    ],
+    "websiteURL": "https://github.com/yiliu30/z2h",
+    "brandColor": "#2563EB",
+    "defaultPrompt": [
+      "Install the custom skills from this repo.",
+      "List the skills bundled in this plugin.",
+      "Add one of these skills to my local setup."
+    ]
+  }
+}

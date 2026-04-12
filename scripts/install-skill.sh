@@ -32,10 +32,9 @@ list_skills() {
     echo -e "${CYAN}Available skills:${NC}"
     echo ""
 
-    # Custom skills
-    if [ -d "$REPO_ROOT/custom" ]; then
-        echo -e "${GREEN}── Custom ──${NC}"
-        find "$REPO_ROOT/custom" -name "SKILL.md" -type f | sort | while read -r skill_md; do
+    if [ -d "$REPO_ROOT/skills" ]; then
+        echo -e "${GREEN}── Repo Skills ──${NC}"
+        find "$REPO_ROOT/skills" -name "SKILL.md" -type f | sort | while read -r skill_md; do
             skill_dir="$(dirname "$skill_md")"
             skill_name="$(basename "$skill_dir")"
             desc=$(grep -A1 "^description:" "$skill_md" | head -1 | sed 's/^description:\s*//' | sed "s/^['\"]//;s/['\"]$//" | cut -c1-80)
@@ -43,35 +42,17 @@ list_skills() {
         done
         echo ""
     fi
-
-    # Third-party skills
-    if [ -d "$REPO_ROOT/third-party" ]; then
-        for source_dir in "$REPO_ROOT"/third-party/*/; do
-            source_name="$(basename "$source_dir")"
-            echo -e "${YELLOW}── $source_name ──${NC}"
-            find "$source_dir" -name "SKILL.md" -type f | sort | while read -r skill_md; do
-                skill_dir="$(dirname "$skill_md")"
-                skill_name="$(basename "$skill_dir")"
-                desc=$(grep -A1 "^description:" "$skill_md" | head -1 | sed 's/^description:\s*//' | sed "s/^['\"]//;s/['\"]$//" | cut -c1-80)
-                printf "  %-30s %s\n" "$skill_name" "$desc"
-            done
-            echo ""
-        done
-    fi
 }
 
 find_skill() {
     local name="$1"
-    # Search custom first, then third-party
-    for search_dir in "$REPO_ROOT/custom" "$REPO_ROOT/third-party"; do
-        if [ -d "$search_dir" ]; then
-            result=$(find "$search_dir" -type d -name "$name" | head -1)
-            if [ -n "$result" ] && [ -f "$result/SKILL.md" ]; then
-                echo "$result"
-                return 0
-            fi
+    if [ -d "$REPO_ROOT/skills" ]; then
+        result=$(find "$REPO_ROOT/skills" -type d -name "$name" | head -1)
+        if [ -n "$result" ] && [ -f "$result/SKILL.md" ]; then
+            echo "$result"
+            return 0
         fi
-    done
+    fi
     return 1
 }
 

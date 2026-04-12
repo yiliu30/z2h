@@ -1,0 +1,20 @@
+{
+  "name": "z2h",
+  "interface": {
+    "displayName": "z2h (Zero to Hero)"
+  },
+  "plugins": [
+    {
+      "name": "z2h-custom",
+      "source": {
+        "source": "local",
+        "path": "../../plugins/z2h-custom"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

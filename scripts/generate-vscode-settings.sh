@@ -8,7 +8,7 @@ set -euo pipefail
 #
 # Usage:
 #   ./scripts/generate-vscode-settings.sh
-#   ./scripts/generate-vscode-settings.sh --hub-path ~/workspace/agent-skills-hub
+#   ./scripts/generate-vscode-settings.sh --hub-path ~/workspace/z2h
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_HUB_PATH="$(dirname "$SCRIPT_DIR")"
@@ -26,7 +26,7 @@ while [[ $# -gt 0 ]]; do
             echo "Usage: $0 [--hub-path <path>]"
             echo "  Generates VS Code chat.agentSkillsLocations and"
             echo "  chat.instructionsFilesLocations settings snippet."
-            echo "  --hub-path  Path to agent-skills-hub repo (default: auto-detected)"
+            echo "  --hub-path  Path to z2h repo (default: auto-detected)"
             exit 0
             ;;
         *) echo "Unknown option: $1"; exit 1 ;;
@@ -41,22 +41,9 @@ to_tilde_path() {
 # Collect all skill directories (folders that directly contain SKILL.md files)
 skill_locations=()
 
-# Custom skills: point to custom/ so all subdirs are discovered
-if [ -d "$HUB_PATH/custom" ]; then
-    skill_locations+=("$(to_tilde_path "$HUB_PATH/custom")")
+if [ -d "$HUB_PATH/skills" ]; then
+    skill_locations+=("$(to_tilde_path "$HUB_PATH/skills")")
 fi
-
-# Third-party: find the parent directory that contains skill subdirectories
-for submodule_dir in "$HUB_PATH"/third-party/*/; do
-    [ -d "$submodule_dir" ] || continue
-    # Look for a skills/ subdirectory (common pattern)
-    if [ -d "${submodule_dir}skills" ]; then
-        skill_locations+=("$(to_tilde_path "${submodule_dir}skills")")
-    else
-        # Fallback: point to the submodule root if skills are at top level
-        skill_locations+=("$(to_tilde_path "$submodule_dir")")
-    fi
-done
 
 # Collect instruction directories
 instruction_locations=()
@@ -64,19 +51,11 @@ if [ -d "$HUB_PATH/instructions" ]; then
     instruction_locations+=("$(to_tilde_path "$HUB_PATH/instructions")")
 fi
 
-# Third-party instruction directories
-for submodule_dir in "$HUB_PATH"/third-party/*/; do
-    [ -d "$submodule_dir" ] || continue
-    if [ -d "${submodule_dir}instructions" ]; then
-        instruction_locations+=("$(to_tilde_path "${submodule_dir}instructions")")
-    fi
-done
-
 # Generate JSON
 echo ""
 echo -e "${CYAN}Add the following to your VS Code settings.json:${NC}"
 echo ""
-echo -e "${GREEN}// --- agent-skills-hub: skill search paths ---${NC}"
+echo -e "${GREEN}// --- z2h: skill search paths ---${NC}"
 echo '"chat.agentSkillsLocations": {'
 
 last_idx=$(( ${#skill_locations[@]} - 1 ))
@@ -90,7 +69,7 @@ done
 
 echo '},'
 
-echo -e "${GREEN}// --- agent-skills-hub: instruction file paths ---${NC}"
+echo -e "${GREEN}// --- z2h: instruction file paths ---${NC}"
 echo '"chat.instructionsFilesLocations": {'
 
 last_idx=$(( ${#instruction_locations[@]} - 1 ))
