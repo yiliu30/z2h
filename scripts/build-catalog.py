@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
-Build a unified catalog.json from all skill sources (third-party submodules + custom).
+Build catalog.json from the repo's bundled skills.
 
-Scans for SKILL.md files, extracts frontmatter metadata, and writes catalog.json.
+Scans for SKILL.md files under skills/, extracts frontmatter metadata,
+and writes catalog.json.
 
 Usage:
     python scripts/build-catalog.py
@@ -10,7 +11,6 @@ Usage:
 """
 
 import json
-import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -18,13 +18,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT = REPO_ROOT / "catalog.json"
-
-# Directories to scan and their source_type
-SCAN_DIRS = [
-    # (directory, source_type, source_name_override)
-    (REPO_ROOT / "third-party", "third-party", None),
-    (REPO_ROOT / "custom", "custom", "custom"),
-]
+SKILLS_DIR = REPO_ROOT / "skills"
 
 
 def parse_frontmatter(skill_md_path: Path) -> dict:
@@ -64,15 +58,6 @@ def find_skills_in_dir(base_dir: Path) -> list[tuple[Path, Path]]:
     return results
 
 
-def detect_source_name(skill_dir: Path, base_dir: Path) -> str:
-    """Detect the source name from the submodule directory name."""
-    rel = skill_dir.relative_to(base_dir)
-    parts = rel.parts
-    if len(parts) >= 1:
-        return parts[0]
-    return "unknown"
-
-
 def has_assets(skill_dir: Path) -> bool:
     """Check if a skill directory has non-SKILL.md files (assets, templates, scripts)."""
     for item in skill_dir.iterdir():
@@ -82,55 +67,44 @@ def has_assets(skill_dir: Path) -> bool:
 
 
 def build_catalog(output_path: Path = DEFAULT_OUTPUT) -> dict:
-    """Scan all skill directories and build the catalog."""
+    """Scan the repo skills directory and build the catalog."""
     skills = []
-    seen_names = {}  # track duplicates: name -> list of sources
+    seen_names = {}
 
-    for scan_dir, source_type, source_name_override in SCAN_DIRS:
-        for skill_md, skill_dir in find_skills_in_dir(scan_dir):
-            fm = parse_frontmatter(skill_md)
-            name = fm.get("name", skill_dir.name)
-            description = fm.get("description", "")
-            license_info = fm.get("license", "")
+    for skill_md, skill_dir in find_skills_in_dir(SKILLS_DIR):
+        fm = parse_frontmatter(skill_md)
+        name = fm.get("name", skill_dir.name)
+        description = fm.get("description", "")
+        license_info = fm.get("license", "")
 
-            if source_name_override:
-                source = source_name_override
-            else:
-                source = detect_source_name(skill_dir, scan_dir)
+        rel_path = str(skill_dir.relative_to(REPO_ROOT))
 
-            rel_path = str(skill_dir.relative_to(REPO_ROOT))
+        skill_entry = {
+            "name": name,
+            "description": description,
+            "source": "agent-skills-hub",
+            "source_type": "repo",
+            "path": rel_path,
+            "has_assets": has_assets(skill_dir),
+        }
+        if license_info:
+            skill_entry["license"] = license_info
 
-            skill_entry = {
-                "name": name,
-                "description": description,
-                "source": source,
-                "source_type": source_type,
-                "path": rel_path,
-                "has_assets": has_assets(skill_dir),
-            }
-            if license_info:
-                skill_entry["license"] = license_info
+        if name in seen_names:
+            seen_names[name].append(rel_path)
+            skill_entry["duplicate_of"] = seen_names[name][0]
+        else:
+            seen_names[name] = [rel_path]
 
-            # Track duplicates
-            if name in seen_names:
-                seen_names[name].append(source)
-                skill_entry["duplicate_of"] = seen_names[name][0]
-            else:
-                seen_names[name] = [source]
+        skills.append(skill_entry)
 
-            skills.append(skill_entry)
-
-    # Sort by source_type (custom first) then name
-    skills.sort(key=lambda s: (0 if s["source_type"] == "custom" else 1, s["name"]))
+    skills.sort(key=lambda s: s["name"])
 
     catalog = {
         "version": "1.0",
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_skills": len(skills),
-        "sources": {
-            "custom": len([s for s in skills if s["source_type"] == "custom"]),
-            "third-party": len([s for s in skills if s["source_type"] == "third-party"]),
-        },
+        "sources": {"repo": len(skills)},
         "duplicates": [
             {"name": name, "found_in": sources}
             for name, sources in seen_names.items()
@@ -150,8 +124,7 @@ def build_catalog(output_path: Path = DEFAULT_OUTPUT) -> dict:
 def print_summary(catalog: dict) -> None:
     """Print a human-readable summary."""
     print(f"✅ Catalog built: {catalog['total_skills']} skills total")
-    print(f"   Custom:      {catalog['sources']['custom']}")
-    print(f"   Third-party: {catalog['sources']['third-party']}")
+    print(f"   Repo:        {catalog['sources']['repo']}")
     if catalog["duplicates"]:
         print(f"\n⚠️  Duplicates detected ({len(catalog['duplicates'])}):")
         for dup in catalog["duplicates"]:

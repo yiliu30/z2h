@@ -1,0 +1,20 @@
+{
+  "name": "agent-skills-hub",
+  "interface": {
+    "displayName": "Agent Skills Hub"
+  },
+  "plugins": [
+    {
+      "name": "agent-skills-hub-custom",
+      "source": {
+        "source": "local",
+        "path": "./plugins/agent-skills-hub-custom"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
