@@ -8,7 +8,7 @@
       "name": "agent-skills-hub-custom",
       "source": {
         "source": "local",
-        "path": "./plugins/agent-skills-hub-custom"
+        "path": "../../plugins/agent-skills-hub-custom"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -27,7 +27,7 @@ PLUGIN_JSON = {
     "repository": "https://github.com/yiliu7/agent-skills-hub",
     "license": "MIT",
     "keywords": ["skills", "agents", "codex", "claude-code"],
-    "skills": "./../../skills",
+    "skills": "./../../../skills",
     "interface": {
         "displayName": "Agent Skills Hub",
         "shortDescription": "Custom skills bundled from this repo.",
@@ -53,7 +53,7 @@ MARKETPLACE_JSON = {
             "name": PLUGIN_NAME,
             "source": {
                 "source": "local",
-                "path": f"./plugins/{PLUGIN_NAME}",
+                "path": f"../../plugins/{PLUGIN_NAME}",
             },
             "policy": {
                 "installation": "AVAILABLE",

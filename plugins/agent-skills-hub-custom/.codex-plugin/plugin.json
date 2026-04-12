@@ -15,7 +15,7 @@
     "codex",
     "claude-code"
   ],
-  "skills": "./../../skills",
+  "skills": "./../../../skills",
   "interface": {
     "displayName": "Agent Skills Hub",
     "shortDescription": "Custom skills bundled from this repo.",
