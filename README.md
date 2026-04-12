@@ -1,12 +1,13 @@
 # z2h (Zero to Hero)
 
-Custom agent skills and instruction files, packaged so the repo can be used directly with `npx skills add ...`.
+Custom agent skills, rule files, and instruction files, packaged so the repo can be used directly with `npx skills add ...`.
 
 ## Repo Layout
 
 ```text
 z2h/
 ├── skills/                       # installable skills
+├── rules/                        # optional shared rule files
 ├── instructions/                 # optional .instructions.md files
 ├── plugins/
 │   └── z2h-custom/  # plugin metadata for marketplace-style installs
