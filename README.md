@@ -24,13 +24,13 @@ z2h/
 Install all bundled skills from GitHub:
 
 ```bash
-npx skills add <your-user>/z2h
+npx skills add yiliu30/z2h
 ```
 
 List what the repo exposes:
 
 ```bash
-npx skills add <your-user>/z2h --list
+npx skills add yiliu30/z2h --list
 ```
 
 Install from a local checkout:
@@ -38,6 +38,16 @@ Install from a local checkout:
 ```bash
 npx skills add .
 ```
+
+## Bundled Skills
+
+| Skill | What It Does |
+|------|------|
+| `example-skill` | Template skill you can copy when creating a new skill. |
+| `find-sth` | Investigates technical questions across code, docs, papers, and other sources, then writes a sourced findings document. |
+| `observe` | Records structured observations from another Claude Code session and bails early when there is nothing meaningful to record. |
+| `real-review` | Fact-checks written content against primary evidence before publishing. |
+| `reduce-model` | Creates a reduced HuggingFace model for faster testing and debugging workflows. |
 
 ## Local Commands
 
