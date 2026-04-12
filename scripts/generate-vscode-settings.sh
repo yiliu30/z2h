@@ -41,36 +41,15 @@ to_tilde_path() {
 # Collect all skill directories (folders that directly contain SKILL.md files)
 skill_locations=()
 
-# Custom skills: point to custom/ so all subdirs are discovered
-if [ -d "$HUB_PATH/custom" ]; then
-    skill_locations+=("$(to_tilde_path "$HUB_PATH/custom")")
+if [ -d "$HUB_PATH/skills" ]; then
+    skill_locations+=("$(to_tilde_path "$HUB_PATH/skills")")
 fi
-
-# Third-party: find the parent directory that contains skill subdirectories
-for submodule_dir in "$HUB_PATH"/third-party/*/; do
-    [ -d "$submodule_dir" ] || continue
-    # Look for a skills/ subdirectory (common pattern)
-    if [ -d "${submodule_dir}skills" ]; then
-        skill_locations+=("$(to_tilde_path "${submodule_dir}skills")")
-    else
-        # Fallback: point to the submodule root if skills are at top level
-        skill_locations+=("$(to_tilde_path "$submodule_dir")")
-    fi
-done
 
 # Collect instruction directories
 instruction_locations=()
 if [ -d "$HUB_PATH/instructions" ]; then
     instruction_locations+=("$(to_tilde_path "$HUB_PATH/instructions")")
 fi
-
-# Third-party instruction directories
-for submodule_dir in "$HUB_PATH"/third-party/*/; do
-    [ -d "$submodule_dir" ] || continue
-    if [ -d "${submodule_dir}instructions" ]; then
-        instruction_locations+=("$(to_tilde_path "${submodule_dir}instructions")")
-    fi
-done
 
 # Generate JSON
 echo ""

@@ -1,177 +1,102 @@
-# 🧠 Agent Skills Hub
+# Agent Skills Hub
 
-> **Vibe-coding project** — this repo was entirely scaffolded, structured, and shipped through AI-assisted conversation. From planning the architecture to writing scripts, CI, and docs — all done in one vibe-coding session. 🎶
+Custom agent skills and instruction files, packaged so the repo can be used directly with `npx skills add ...`.
 
-A curated collection of agent skills and instruction files from popular open-source repositories plus custom additions — all in one place.
+## Repo Layout
 
-## What are Agent Skills?
-
-Skills are folders of instructions, scripts, and resources that AI coding agents load dynamically to improve performance on specialized tasks. Each skill contains a `SKILL.md` file following the [Agent Skills specification](http://agentskills.io).
-
-## What are Instruction Files?
-
-Instruction files (`.instructions.md`) are lightweight directives that guide agent behavior without the full skill folder structure. They use frontmatter (`description`, `applyTo`) to tell the agent when and how to apply the instructions. VS Code discovers them via `chat.instructionsFilesLocations`.
-
-## Repository Structure
-
-```
+```text
 agent-skills-hub/
-├── Makefile                      # common commands (make help)
-├── third-party/                  # git submodules (upstream repos)
-│   ├── anthropic-skills/         # github.com/anthropics/skills
-│   └── awesome-copilot/          # github.com/github/awesome-copilot
-├── custom/                       # your own skills
-│   └── example-skill/
-├── instructions/                 # instruction files (.instructions.md)
-│   └── gcorrect.instructions.md
+├── skills/                       # installable skills
+├── instructions/                 # optional .instructions.md files
+├── plugins/
+│   └── agent-skills-hub-custom/  # plugin metadata for marketplace-style installs
+├── .agents/plugins/marketplace.json
 ├── scripts/
-│   ├── build-catalog.py          # generates catalog.json
-│   ├── install-skill.sh          # installs a skill locally
-│   └── generate-vscode-settings.sh  # generates VS Code settings snippet
-├── catalog.json                  # auto-generated unified skill index
-└── .github/workflows/            # CI to rebuild catalog
+│   ├── build-catalog.py
+│   ├── export-plugin.py
+│   ├── generate-vscode-settings.sh
+│   └── install-skill.sh
+└── catalog.json
 ```
 
-## Third-Party Skill Sources
+## Install
 
-| Source | Skills | Focus |
-|--------|--------|-------|
-| [anthropics/skills](https://github.com/anthropics/skills) | 16 | Creative, docs, design, enterprise |
-| [github/awesome-copilot](https://github.com/github/awesome-copilot) | 52+ | Dev tools, Azure, Microsoft, CI/CD |
-
-## Quick Start
-
-### Clone with submodules
+Install all bundled skills from GitHub:
 
 ```bash
-git clone --recurse-submodules https://github.com/<your-user>/agent-skills-hub.git
-cd agent-skills-hub
+npx skills add <your-user>/agent-skills-hub
 ```
 
-If you already cloned without `--recurse-submodules`:
+List what the repo exposes:
 
 ```bash
-git submodule update --init --recursive
+npx skills add <your-user>/agent-skills-hub --list
 ```
 
-### Available commands
-
-All common operations are available via `make`:
+Install from a local checkout:
 
 ```bash
-make help       # show all commands
+npx skills add .
+```
+
+## Local Commands
+
+```bash
+make help
+make list
+make catalog
+make plugin
+make refresh
 ```
 
 | Command | Description |
 |---------|-------------|
-| `make update` | Pull latest from third-party submodules |
-| `make settings` | Generate VS Code `chat.agentSkillsLocations` snippet |
-| `make catalog` | Rebuild `catalog.json` from all skill sources |
-| `make refresh` | Update submodules + rebuild catalog in one step |
-| `make list` | List all available skills |
-| `make install SKILL=<name> TARGET=<dir>` | Install a skill to a target directory |
+| `make list` | List bundled skills |
+| `make install SKILL=<name> TARGET=<dir>` | Copy one skill into a target directory |
+| `make catalog` | Rebuild `catalog.json` from `skills/` |
+| `make plugin` | Rebuild plugin marketplace metadata |
+| `make refresh` | Rebuild both catalog and plugin metadata |
+| `make settings` | Generate VS Code settings snippets |
 
-### Configure VS Code
+## VS Code
 
-Generate the `chat.agentSkillsLocations` and `chat.instructionsFilesLocations` settings so VS Code discovers all skills and instructions automatically:
+Generate a settings snippet:
 
 ```bash
 make settings
 ```
 
-Then copy the output into your VS Code `settings.json` (user or workspace):
+Expected paths:
 
 ```jsonc
 "chat.agentSkillsLocations": {
-    "~/workspace/agent-skills-hub/custom": true,
-    "~/workspace/agent-skills-hub/third-party/anthropic-skills/skills": true,
-    "~/workspace/agent-skills-hub/third-party/awesome-copilot/skills": true
+  "~/workspace/agent-skills-hub/skills": true
 },
 "chat.instructionsFilesLocations": {
-    "~/workspace/agent-skills-hub/instructions": true
+  "~/workspace/agent-skills-hub/instructions": true
 }
 ```
 
-### Update third-party skills
+## Adding A Skill
+
+1. Copy the template:
 
 ```bash
-make update    # pull latest from upstream
-make catalog   # rebuild the catalog
-# or both at once:
-make refresh
+cp -r skills/example-skill skills/my-new-skill
 ```
 
-### Browse & install skills
+2. Edit `skills/my-new-skill/SKILL.md`.
+3. Run `make refresh`.
 
-```bash
-# List all available skills
-make list
+## Catalog
 
-# Install a specific skill to a target directory
-make install SKILL=git-commit TARGET=~/.config/skills/
-```
+`catalog.json` is generated from `skills/` and records:
 
-## Adding Custom Skills
-
-1. Create a new folder under `custom/`:
-   ```bash
-   cp -r custom/example-skill custom/my-new-skill
-   ```
-2. Edit `custom/my-new-skill/SKILL.md` with your skill content
-3. Rebuild the catalog:
-   ```bash
-   make catalog
-   ```
-4. Commit and push
-
-See the [skill template](custom/example-skill/SKILL.md) for the expected format.
-
-## Adding Instruction Files
-
-1. Create a new `.instructions.md` file under `instructions/`:
-   ```bash
-   cat > instructions/my-instruction.instructions.md << 'EOF'
-   ---
-   description: A short description of what this instruction does.
-   applyTo: 'When this instruction should be applied.'
-   ---
-   Your instruction content here.
-   EOF
-   ```
-2. Run `make settings` to verify the `instructions/` path is included
-3. Commit and push
-
-## Adding More Third-Party Sources
-
-```bash
-git submodule add https://github.com/<owner>/<repo>.git third-party/<name>
-make catalog
-git add . && git commit -m "feat: add <name> as third-party skill source"
-```
-
-## Catalog Schema
-
-`catalog.json` is auto-generated and contains:
-
-```json
-{
-  "version": "1.0",
-  "generated_at": "2026-02-24T00:00:00Z",
-  "total_skills": 74,
-  "sources": { "custom": 1, "third-party": 73 },
-  "skills": [
-    {
-      "name": "git-commit",
-      "description": "Execute git commit with conventional commits...",
-      "source": "awesome-copilot",
-      "source_type": "third-party",
-      "path": "third-party/awesome-copilot/skills/git-commit",
-      "has_assets": false
-    }
-  ]
-}
-```
+- skill name
+- description
+- repo-relative path
+- whether the skill includes extra assets
 
 ## License
 
-Custom skills in this repo are licensed under [MIT](LICENSE). Third-party skills retain their original licenses — see each submodule for details.
+The repo is licensed under [MIT](LICENSE).
