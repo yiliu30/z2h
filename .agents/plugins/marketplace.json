@@ -1,14 +1,14 @@
 {
-  "name": "agent-skills-hub",
+  "name": "z2h",
   "interface": {
-    "displayName": "Agent Skills Hub"
+    "displayName": "z2h (Zero to Hero)"
   },
   "plugins": [
     {
-      "name": "agent-skills-hub-custom",
+      "name": "z2h-custom",
       "source": {
         "source": "local",
-        "path": "../../plugins/agent-skills-hub-custom"
+        "path": "../../plugins/z2h-custom"
       },
       "policy": {
         "installation": "AVAILABLE",

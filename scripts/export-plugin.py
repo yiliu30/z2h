@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-PLUGIN_NAME = "agent-skills-hub-custom"
+PLUGIN_NAME = "z2h-custom"
 PLUGIN_DIR = REPO_ROOT / "plugins" / PLUGIN_NAME
 PLUGIN_MANIFEST = PLUGIN_DIR / ".codex-plugin" / "plugin.json"
 MARKETPLACE_PATH = REPO_ROOT / ".agents" / "plugins" / "marketplace.json"
@@ -18,24 +18,24 @@ MARKETPLACE_PATH = REPO_ROOT / ".agents" / "plugins" / "marketplace.json"
 PLUGIN_JSON = {
     "name": PLUGIN_NAME,
     "version": "0.1.0",
-    "description": "Custom installable skills from agent-skills-hub.",
+    "description": "Custom installable skills from z2h.",
     "author": {
-        "name": "agent-skills-hub",
-        "url": "https://github.com/yiliu7/agent-skills-hub",
+        "name": "z2h",
+        "url": "https://github.com/yiliu30/z2h",
     },
-    "homepage": "https://github.com/yiliu7/agent-skills-hub",
-    "repository": "https://github.com/yiliu7/agent-skills-hub",
+    "homepage": "https://github.com/yiliu30/z2h",
+    "repository": "https://github.com/yiliu30/z2h",
     "license": "MIT",
     "keywords": ["skills", "agents", "codex", "claude-code"],
     "skills": "./../../../skills",
     "interface": {
-        "displayName": "Agent Skills Hub",
+        "displayName": "z2h (Zero to Hero)",
         "shortDescription": "Custom skills bundled from this repo.",
-        "longDescription": "Installs the custom skills published in agent-skills-hub.",
-        "developerName": "agent-skills-hub",
+        "longDescription": "Installs the custom skills published in z2h.",
+        "developerName": "z2h",
         "category": "Productivity",
         "capabilities": ["Write"],
-        "websiteURL": "https://github.com/yiliu7/agent-skills-hub",
+        "websiteURL": "https://github.com/yiliu30/z2h",
         "brandColor": "#2563EB",
         "defaultPrompt": [
             "Install the custom skills from this repo.",
@@ -46,8 +46,8 @@ PLUGIN_JSON = {
 }
 
 MARKETPLACE_JSON = {
-    "name": "agent-skills-hub",
-    "interface": {"displayName": "Agent Skills Hub"},
+    "name": "z2h",
+    "interface": {"displayName": "z2h (Zero to Hero)"},
     "plugins": [
         {
             "name": PLUGIN_NAME,

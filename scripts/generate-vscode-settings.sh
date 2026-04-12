@@ -8,7 +8,7 @@ set -euo pipefail
 #
 # Usage:
 #   ./scripts/generate-vscode-settings.sh
-#   ./scripts/generate-vscode-settings.sh --hub-path ~/workspace/agent-skills-hub
+#   ./scripts/generate-vscode-settings.sh --hub-path ~/workspace/z2h
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DEFAULT_HUB_PATH="$(dirname "$SCRIPT_DIR")"
@@ -26,7 +26,7 @@ while [[ $# -gt 0 ]]; do
             echo "Usage: $0 [--hub-path <path>]"
             echo "  Generates VS Code chat.agentSkillsLocations and"
             echo "  chat.instructionsFilesLocations settings snippet."
-            echo "  --hub-path  Path to agent-skills-hub repo (default: auto-detected)"
+            echo "  --hub-path  Path to z2h repo (default: auto-detected)"
             exit 0
             ;;
         *) echo "Unknown option: $1"; exit 1 ;;
@@ -55,7 +55,7 @@ fi
 echo ""
 echo -e "${CYAN}Add the following to your VS Code settings.json:${NC}"
 echo ""
-echo -e "${GREEN}// --- agent-skills-hub: skill search paths ---${NC}"
+echo -e "${GREEN}// --- z2h: skill search paths ---${NC}"
 echo '"chat.agentSkillsLocations": {'
 
 last_idx=$(( ${#skill_locations[@]} - 1 ))
@@ -69,7 +69,7 @@ done
 
 echo '},'
 
-echo -e "${GREEN}// --- agent-skills-hub: instruction file paths ---${NC}"
+echo -e "${GREEN}// --- z2h: instruction file paths ---${NC}"
 echo '"chat.instructionsFilesLocations": {'
 
 last_idx=$(( ${#instruction_locations[@]} - 1 ))

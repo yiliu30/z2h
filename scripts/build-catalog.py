@@ -82,7 +82,7 @@ def build_catalog(output_path: Path = DEFAULT_OUTPUT) -> dict:
         skill_entry = {
             "name": name,
             "description": description,
-            "source": "agent-skills-hub",
+            "source": "z2h",
             "source_type": "repo",
             "path": rel_path,
             "has_assets": has_assets(skill_dir),

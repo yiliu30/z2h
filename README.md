@@ -1,15 +1,15 @@
-# Agent Skills Hub
+# z2h (Zero to Hero)
 
 Custom agent skills and instruction files, packaged so the repo can be used directly with `npx skills add ...`.
 
 ## Repo Layout
 
 ```text
-agent-skills-hub/
+z2h/
 ├── skills/                       # installable skills
 ├── instructions/                 # optional .instructions.md files
 ├── plugins/
-│   └── agent-skills-hub-custom/  # plugin metadata for marketplace-style installs
+│   └── z2h-custom/  # plugin metadata for marketplace-style installs
 ├── .agents/plugins/marketplace.json
 ├── scripts/
 │   ├── build-catalog.py
@@ -24,13 +24,13 @@ agent-skills-hub/
 Install all bundled skills from GitHub:
 
 ```bash
-npx skills add <your-user>/agent-skills-hub
+npx skills add <your-user>/z2h
 ```
 
 List what the repo exposes:
 
 ```bash
-npx skills add <your-user>/agent-skills-hub --list
+npx skills add <your-user>/z2h --list
 ```
 
 Install from a local checkout:
@@ -70,10 +70,10 @@ Expected paths:
 
 ```jsonc
 "chat.agentSkillsLocations": {
-  "~/workspace/agent-skills-hub/skills": true
+  "~/workspace/z2h/skills": true
 },
 "chat.instructionsFilesLocations": {
-  "~/workspace/agent-skills-hub/instructions": true
+  "~/workspace/z2h/instructions": true
 }
 ```
 

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-12T06:07:10.449978+00:00",
+  "generated_at": "2026-04-12T06:24:20.255659+00:00",
   "total_skills": 5,
   "sources": {
     "repo": 5
@@ -10,7 +10,7 @@
     {
       "name": "example-skill",
       "description": "A template skill to get you started. Replace this with your skill's description — explain what the skill does, when to use it, and what triggers it.",
-      "source": "agent-skills-hub",
+      "source": "z2h",
       "source_type": "repo",
       "path": "skills/example-skill",
       "has_assets": false,
@@ -19,7 +19,7 @@
     {
       "name": "find-sth",
       "description": "Investigate a technical question by searching across multiple sources (source code, documentation, academic papers, existing findings) and produce a sourced findings document saved to disk. Use this skill whenever the user asks to \"investigate\", \"find out\", \"research\", \"figure out\", \"what does X support\", \"how does X work\", \"why does X differ from Y\", or any question that requires digging through code and docs to answer. Also use it when the user asks to compare implementations, trace a behavior through a codebase, or understand hardware/software constraints. This is for discovery work, not fact-checking existing documents (use real-review for that).",
-      "source": "agent-skills-hub",
+      "source": "z2h",
       "source_type": "repo",
       "path": "skills/find-sth",
       "has_assets": false,
@@ -28,7 +28,7 @@
     {
       "name": "observe",
       "description": "Memory observer agent for recording structured observations from primary Claude Code sessions. Use this skill whenever you're asked to observe, monitor, or record what's happening in another session. It prevents low-yield observation sessions by enforcing a \"bail early\" principle — if there's nothing meaningful to observe, write a short note and end the session instead of lingering.",
-      "source": "agent-skills-hub",
+      "source": "z2h",
       "source_type": "repo",
       "path": "skills/observe",
       "has_assets": false,
@@ -37,7 +37,7 @@
     {
       "name": "real-review",
       "description": "Fact-check written content (GitHub issues, docs, reports, posts) by verifying every claim, number, link, code reference, and conclusion against actual evidence. Use this skill when the user asks to \"review\", \"fact-check\", \"verify\", or \"audit\" written content for accuracy. Also use it when the user says things like \"check this post\", \"is this correct\", \"review before publishing\", or \"make sure the claims are right\". This skill is about factual accuracy of prose, not code review or style review.",
-      "source": "agent-skills-hub",
+      "source": "z2h",
       "source_type": "repo",
       "path": "skills/real-review",
       "has_assets": false
@@ -45,7 +45,7 @@
     {
       "name": "reduce-model",
       "description": "Create a reduced (fewer-layer) version of a large HuggingFace model for fast testing and debugging. Use this skill whenever the user wants to reduce a model's layer count, create a small test model, download only part of a model's weights, debug quantization on a smaller model, speed up the testing-verification loop for large LLMs, or create a lightweight version of any HF model for rapid iteration. Trigger on phrases like \"reduce model\", \"small test model\", \"fewer layers\", \"download partial model\", \"debug with smaller model\", \"shrink model for testing\", even if the user doesn't use the exact term \"reduce\".",
-      "source": "agent-skills-hub",
+      "source": "z2h",
       "source_type": "repo",
       "path": "skills/reduce-model",
       "has_assets": true
