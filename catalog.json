@@ -1,12 +1,21 @@
 {
   "version": "1.0",
-  "generated_at": "2026-04-12T06:40:34.876710+00:00",
-  "total_skills": 5,
+  "generated_at": "2026-05-22T08:11:00.689444+00:00",
+  "total_skills": 6,
   "sources": {
-    "repo": 5
+    "repo": 6
   },
   "duplicates": [],
   "skills": [
+    {
+      "name": "confluence-html",
+      "description": "Create rich, interactive HTML that survives Confluence's save sanitizer by using only inline styles, no external resources, and JavaScript for dynamic content. Use this skill when embedding HTML visualizations, interactive diagrams, or data displays into Confluence pages via the HTML macro. The main challenge is that Confluence strips CSS `<style>` blocks and `class=` attributes on save (though preview shows them). This skill ensures your HTML builds and stays beautiful after save.",
+      "source": "z2h",
+      "source_type": "repo",
+      "path": "skills/confluence-html",
+      "has_assets": false,
+      "license": "MIT"
+    },
     {
       "name": "example-skill",
       "description": "A template skill to get you started. Replace this with your skill's description — explain what the skill does, when to use it, and what triggers it.",
