@@ -1,9 +1,9 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-22T08:11:00.689444+00:00",
-  "total_skills": 6,
+  "generated_at": "2026-06-03T20:08:24.122555+00:00",
+  "total_skills": 7,
   "sources": {
-    "repo": 6
+    "repo": 7
   },
   "duplicates": [],
   "skills": [
@@ -58,6 +58,15 @@
       "source_type": "repo",
       "path": "skills/reduce-model",
       "has_assets": true
+    },
+    {
+      "name": "remote-debug",
+      "description": "Drive Claude Code to debug an issue on a remote node over SSH — connect, set up an environment, copy scripts/probes across, run repros, and capture findings. Use when the user says we're 'on a remote node', hands you ssh credentials, or asks to reproduce / debug / set up on a remote host. Covers pexpect-based ssh/scp when sshpass is unavailable, minimal standalone repros, and isolating a root cause by comparing machines.",
+      "source": "z2h",
+      "source_type": "repo",
+      "path": "skills/remote-debug",
+      "has_assets": false,
+      "license": "MIT"
     }
   ]
 }
